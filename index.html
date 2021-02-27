@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replace Browser Fonts</title>
+    <link rel="stylesheet" href="https://www.codeworks.top/static/design-component.css">
+    <link rel="stylesheet" href="https://www.codeworks.top/static/dc-nav.css">
+    <script src="https://www.codeworks.top/static/design-component.js"></script>
+    <style>
+        input,
+        textarea,
+        [contenteditable=true] {
+            box-sizing: border-box;
+            margin-top: 16px;
+            margin-bottom: 16px;
+            width: 100%;
+            border: 1px rgba(0, 0, 0, 12%) solid;
+            border-radius: var(--radius);
+            padding: 11px 15px;
+            font-size: 16px;
+            resize: none;
+        }
+
+        input:focus,
+        textarea:focus,
+        [contenteditable=true]:focus {
+            border: 2px var(--theme-color, dodgerblue) solid;
+            padding: 10px 14px;
+
+            outline: none;
+        }
+
+        textarea {
+            width: 100%;
+            font-family: monospace;
+            resize: none;
+        }
+
+        .dc-main {
+            width: 600px;
+        }
+
+        button {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="dc-nav">
+        <a href="/" class="dc-nav__button--active">
+            <div class="dc-nav__button-icon material-icons-round">home</div>
+            <div class="dc-nav__button-text">首页</div>
+        </a>
+    </nav>
+    <header class="dc-top-bar">
+        <div class="dc-top-bar__text">首页</div>
+    </header>
+    <main class="dc-main">
+        <form>
+            <textarea rows="20" id="input">{
+        "originalFonts": ["-apple-system", "BlinkMacSystemFont", "Helvetica", "Helvetica Neue", "Arial", "Segoe UI", "Roboto", "苹方-简", "PingFang SC", "微软雅黑", "Microsoft YaHei", "Microsoft Yahei UI", "WenQuanYi Micro Hei", "黑体", "SimHei", "宋体", "SimSun", "楷体", "SimKai"],
+        "weightNames": [
+            { "name": "Extralight", "weight": 100 },
+            { "name": "Extralight", "weight": 200 },
+            { "name": "Light", "weight": 300 },
+            { "name": "", "weight": 400 },
+            { "name": "Semibold", "weight": 500 },
+            { "name": "Semibold", "weight": 600 },
+            { "name": "Bold", "weight": 700 },
+            { "name": "Bold", "weight": 800 },
+            { "name": "Bold", "weight": 900 }
+        ],
+        "italic": true,
+        "replacementFont": "更纱黑体 UI SC"
+}</textarea>
+            <button type="button"
+                onclick="document.querySelector('#output').innerText = replaceFonts(JSON.parse(document.querySelector('#input').value))"
+                class="dc-button__contain">生成</button>
+            <textarea rows="20" id="output">
+
+            </textarea>
+        </form>
+    </main>
+    <script>
+        function replaceFonts(fontData) {
+            var output = "";
+            // 在 Weight Names 后添加空格
+            for (i = 0; i < fontData.weightNames.length; i++) {
+                if (fontData.weightNames[i]["weight"] != 400) { //400字重除外
+                    fontData.weightNames[i]["name"] = " " + fontData.weightNames[i]["name"];
+                }
+            }
+            for (i = 0; i < fontData.originalFonts.length; i++) {
+                for (j = 0; j < fontData.weightNames.length; j++) {
+                    output += '@font-face {font-family: "' + fontData.originalFonts[i] + '";src: local("' + fontData.replacementFont + fontData.weightNames[j]["name"] + '");font-weight:' + fontData.weightNames[j]["weight"] + ';}';
+                    if (fontData.italic) output += '@font-face {font-family: "' + fontData.originalFonts[i] + '";src: local("' + fontData.replacementFont + fontData.weightNames[j]["name"] + ' Italic");font-weight:' + fontData.weightNames[j]["weight"] + '; font-style: italic;}';
+                }
+            }
+            return output;
+        }
+        /*
+        console.log(font(["BlinkMacSystemFont", "Helvetica", "Helvetica Neue", "Arial", "Segoe UI", "Roboto", "PingFang SC", "苹方-简", "Microsoft YaHei", "微软雅黑", "Microsoft Yahei UI", "Source Han Sans SC", "思源黑体", "Noto Sans CJK SC", "WenQuanYi Micro Hei", "SimHei", "黑体"], [
+            { "name": "Extralight", "weight": 100 },
+            { "name": "Extralight", "weight": 200 },
+            { "name": "Light", "weight": 300 },
+            { "name": "", "weight": 400 },
+            { "name": "Semibold", "weight": 500 },
+            { "name": "Semibold", "weight": 600 },
+            { "name": "Bold", "weight": 700 },
+            { "name": "Bold", "weight": 800 },
+            { "name": "Bold", "weight": 900 }
+        ], true, "更纱黑体 UI SC") + font(["宋体", "SimSum"], [
+            { "name": "Light", "weight": 100 },
+            { "name": "Light", "weight": 200 },
+            { "name": "Light", "weight": 300 },
+            { "name": "", "weight": 400 },
+            { "name": "Medium", "weight": 500 },
+            { "name": "Semibold", "weight": 600 },
+            { "name": "Bold", "weight": 700 },
+            { "name": "Heavy", "weight": 800 },
+            { "name": "Heavy", "weight": 900 }
+        ], true, "更纱黑体 UI SC")) */
+    </script>
+</body>
+
+</html>
