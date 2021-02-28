@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replace Browser Fonts</title>
+    <link rel="stylesheet" href="https://www.codeworks.top/static/design-component.css">
+    <link rel="stylesheet" href="https://www.codeworks.top/static/dc-nav.css">
+    <link rel="stylesheet" href="https://www.codeworks.top/static/read.css">
+    <script src="https://www.codeworks.top/static/design-component.js"></script>
+    <style>
+        pre, code{
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="dc-nav">
+        <a href="/" class="dc-nav__button">
+            <div class="dc-nav__button-icon material-icons-round">build</div>
+            <div class="dc-nav__button-text">生成</div>
+        </a>
+        <a href="/docs/" class="dc-nav__button--active">
+            <div class="dc-nav__button-icon material-icons-round">description</div>
+            <div class="dc-nav__button-text">文档</div>
+        </a>
+    </nav>
+    <header class="dc-top-bar">
+        <div class="dc-top-bar__text">文档</div>
+    </header>
+    <main class="dc-main">
+        <h1>使用文档</h1>
+        <h2>提交格式</h2>
+        <pre><code>{
+    "originalFonts": ["-apple-system", "BlinkMacSystemFont", "Helvetica", "Helvetica Neue", "Arial", "Segoe UI", "Roboto", "苹方-简", "PingFang SC", "微软雅黑", "Microsoft YaHei", "Microsoft Yahei UI", "WenQuanYi Micro Hei", "黑体", "SimHei", "宋体", "SimSun", "楷体", "SimKai"],
+    "weightNames": [
+        { "name": "Extralight", "weight": 100 },
+        { "name": "Extralight", "weight": 200 },
+        { "name": "Light", "weight": 300 },
+        { "name": "", "weight": 400 },
+        { "name": "Semibold", "weight": 500 },
+        { "name": "Semibold", "weight": 600 },
+        { "name": "Bold", "weight": 700 },
+        { "name": "Bold", "weight": 800 },
+        { "name": "Bold", "weight": 900 }
+    ],
+    "italic": true,
+    "replacementFont": "更纱黑体 UI SC"
+}</code></pre>
+        <p><code>originalFonts</code>是被替换字体，数据类型为数组。</p>
+        <p><code>weightNames</code>是替换字体的字重名称，数据类型为数组。</p>
+        <p><code>italic</code>是选择被替换字体是否有斜体，数据类型为布尔值。</p>
+        <p><code>replacementFont</code>替换字体的名称，数据类型为字符串。</p>
+        <h2>使用方法</h2>
+        <p>将输入值复制到 Stylish 扩展程序中，即可替换字体。（字体需在本地安装）</p>
+        <h2>推荐字体</h2>
+        <p>推荐使用<a href="https://github.com/be5invis/Sarasa-Gothic" target="_block">更纱黑体</a></p>
+    </main>
+</body>
+
+</html>
